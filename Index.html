@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MedEase Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #1e1f2f;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1em 2em;
+      background: #2b2d42;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #edf2f4;
+    }
+
+    nav a {
+      color: #edf2f4;
+      margin: 0 0.75em;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #8d99ae;
+    }
+
+    .hero {
+      background-image: url('https://images.unsplash.com/photo-1588776814546-ec7f6c54e9a0?fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      padding: 4em 2em;
+      text-align: center;
+    }
+
+    .hero h2 {
+      margin-bottom: 1em;
+      font-size: 2em;
+      color: #fff;
+      text-shadow: 1px 1px 5px #000;
+    }
+
+    .login-form input, .login-form button {
+      padding: 0.75em;
+      margin: 0.5em;
+      width: 250px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+    }
+
+    .login-form input {
+      background: #3a3b52;
+      color: #fff;
+    }
+
+    .login-form button {
+      background: #8d99ae;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    main {
+      padding: 2em;
+      display: grid;
+      gap: 2em;
+    }
+
+    section {
+      background: #2c2d3f;
+      padding: 2em;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .dashboard, .message-list, .clinic-list {
+      display: flex;
+      gap: 2em;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: #3a3b52;
+      padding: 1em;
+      border-radius: 10px;
+      margin-top: 0.5em;
+      color: #edf2f4;
+      flex: 1 1 200px;
+    }
+
+    .service-icons {
+      display: flex;
+      gap: 1em;
+    }
+
+    .icon {
+      background: #4c4e69;
+      padding: 1em;
+      color: white;
+      border-radius: 10px;
+      flex: 1;
+      text-align: center;
+    }
+
+    .profile-card {
+      text-align: center;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: auto;
+      display: block;
+    }
+
+    .suggestions button {
+      background: #4c4e69;
+      color: #fff;
+      padding: 0.5em 1em;
+      border: none;
+      margin: 0.5em;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1em;
+    }
+
+    .map {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    input[type="text"] {
+      padding: 0.5em;
+      width: 100%;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 1em;
+      background: #3a3b52;
+      color: white;
+    }
+
+    footer {
+      background: #2b2d42;
+      color: white;
+      text-align: center;
+      padding: 1em;
+      margin-top: 2em;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 0.5em;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">MedEase</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#network">Network</a>
+      <a href="#chat">Chat</a>
+      <a href="#profile">Profile</a>
+      <a href="#messages">Messages</a>
+      <a href="#notifications">Notifications</a>
+    </nav>
+  </header>
+
+  <!-- Home -->
+  <section id="home" class="hero">
+    <h2>Welcome to MedEase</h2>
+    <form class="login-form">
+      <input type="email" placeholder="Email" />
+      <input type="password" placeholder="Password" />
+      <button>Sign In</button>
+    </form>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <h3>Services</h3>
+    <div class="service-icons">
+      <div class="icon">Nearby Care</div>
+      <div class="icon">Medical Network</div>
+    </div>
+  </section>
+
+  <!-- Network -->
+  <section id="network">
+    <h3>Network</h3>
+    <div class="grid">
+      <div class="card"><img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?fit=crop&w=200&q=80" alt="Dr. A"><p>Dr. A</p></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1588774065297-02a2f0efbff3?fit=crop&w=200&q=80" alt="Dr. B"><p>Dr. B</p></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1612349317150-e413f6fe55d6?fit=crop&w=200&q=80" alt="Dr. C"><p>Dr. C</p></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1606813902794-e1c2df199fb0?fit=crop&w=200&q=80" alt="Dr. D"><p>Dr. D</p></div>
+    </div>
+  </section>
+
+  <!-- Chat -->
+  <section id="chat">
+    <h3>Chatbot AI</h3>
+    <input type="text" placeholder="Type your question..." />
+    <button>Send</button>
+    <div class="suggestions">
+      <button>Ask about a symptom</button>
+      <button>Find care nearby</button>
+    </div>
+  </section>
+
+  <!-- Profile -->
+  <section id="profile">
+    <h3>Profile</h3>
+    <div class="profile-card">
+      <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" class="avatar" />
+      <p><strong>Arnold James</strong></p>
+      <p>Known Symptoms: Fever, Cough</p>
+      <p>Daily Checklist: ✔ Meds ✔ Rest</p>
+    </div>
+  </section>
+
+  <!-- Messages -->
+  <section id="messages">
+    <h3>Messages</h3>
+    <input type="text" placeholder="Search..." />
+    <div class="message-list">
+      <div class="card">User 1 - Last Message</div>
+      <div class="card">User 2 - Last Message</div>
+    </div>
+  </section>
+
+  <!-- Notifications -->
+  <section id="notifications">
+    <h3>Notifications</h3>
+    <ul>
+      <li>Appointment Reminder <input type="checkbox" /></li>
+      <li>New Message Received <input type="checkbox" /></li>
+      <li>Health Tip of the Day <input type="checkbox" /></li>
+    </ul>
+  </section>
+
+  <footer>
+    © 2025 MedEase | Privacy Policy | Terms of Use
+  </footer>
+
+</body>
+</html>
+fonts.googleapis.com

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notifications | MedEase</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #1e1f2f;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #2b2d42;
+      padding: 1em;
+      text-align: center;
+      font-size: 1.8em;
+      font-weight: 600;
+    }
+
+    section {
+      padding: 2em;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      margin-bottom: 1em;
+      font-size: 1.5em;
+      color: #dbe4f0;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: linear-gradient(135deg, #32344a, #3a3b52);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      padding: 1.2em;
+      border-radius: 12px;
+      margin-bottom: 1.2em;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      transition: all 0.4s ease;
+      overflow: hidden;
+      max-height: 100px;
+      cursor: pointer;
+    }
+
+    li:hover {
+      max-height: 250px;
+    }
+
+    li.read {
+      opacity: 0.5;
+    }
+
+    li.read .notification-text {
+      text-decoration: line-through;
+      color: #aaa;
+    }
+
+    .notification-content {
+      flex: 1;
+      transition: all 0.3s ease;
+    }
+
+    .notification-text {
+      font-size: 1.1em;
+    }
+
+    .timestamp {
+      color: #bbb;
+      font-size: 0.8em;
+      display: block;
+      margin-top: 4px;
+    }
+
+    .extra-info {
+      margin-top: 10px;
+      color: #ccc;
+      font-size: 0.9em;
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    li:hover .extra-info {
+      display: block;
+    }
+
+    .right-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: 1em;
+      gap: 10px;
+    }
+
+    .right-actions input[type="checkbox"] {
+      transform: scale(1.4);
+      accent-color: #00c896;
+      cursor: pointer;
+    }
+
+    .delete-btn {
+      background: transparent;
+      border: none;
+      color: #f76c6c;
+      font-size: 1.3em;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      li {
+        flex-direction: column;
+        align-items: flex-start;
+        max-height: none;
+      }
+
+      .right-actions {
+        flex-direction: row;
+        margin-top: 1em;
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>MedEase - Notifications</header>
+
+  <section>
+    <h2>Recent Notifications</h2>
+    <ul id="notificationList">
+      <li>
+        <div class="notification-content">
+          <span class="notification-text"><i class="fas fa-calendar-check"></i> Appointment Reminder</span>
+          <span class="timestamp">10 minutes ago</span>
+          <div class="extra-info">Don't forget your check-up today at 3:00 PM with Dr. Reyes.</div>
+        </div>
+        <div class="right-actions">
+          <input type="checkbox">
+          <button class="delete-btn"><i class="fas fa-trash"></i></button>
+        </div>
+      </li>
+      <li>
+        <div class="notification-content">
+          <span class="notification-text"><i class="fas fa-envelope"></i> New Message Received</span>
+          <span class="timestamp">1 hour ago</span>
+          <div class="extra-info">You've received a message from Dr. Tan regarding your prescription update.</div>
+        </div>
+        <div class="right-actions">
+          <input type="checkbox">
+          <button class="delete-btn"><i class="fas fa-trash"></i></button>
+        </div>
+      </li>
+      <li>
+        <div class="notification-content">
+          <span class="notification-text"><i class="fas fa-lightbulb"></i> Health Tip of the Day</span>
+          <span class="timestamp">Today</span>
+          <div class="extra-info">Drink at least 8 glasses of water today to stay hydrated and focused.</div>
+        </div>
+        <div class="right-actions">
+          <input type="checkbox">
+          <button class="delete-btn"><i class="fas fa-trash"></i></button>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <script>
+    // Handle read toggle
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+      checkbox.addEventListener('change', function () {
+        const li = this.closest('li');
+        li.classList.toggle('read', this.checked);
+      });
+    });
+
+    // Handle delete
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const li = this.closest('li');
+        li.remove();
+      });
+    });
+  </script>
+</body>
+</html>

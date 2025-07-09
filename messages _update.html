@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Messages | MedEase</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #1e1f2f;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #2b2d42;
+      padding: 1em;
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: 600;
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.2); /* thin white line */
+    }
+
+    section {
+      display: flex;
+      height: calc(100vh - 70px);
+    }
+
+    .sidebar {
+      width: 30%;
+      padding: 1em;
+      background-color: #2a2c3f; /* reverted to original dark */
+      border-right: 1px solid #444;
+      overflow-y: auto;
+    }
+
+    input[type="text"] {
+      padding: 0.75em;
+      width: 100%;
+      border: none;
+      background: #3a3b52;
+      color: white;
+      border-radius: 8px;
+      margin-bottom: 1em;
+    }
+
+    .message-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+
+    .card {
+      background: #4c4e69;
+      padding: 0.75em;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .card:hover {
+      background: #5b5d7a;
+    }
+
+    .card img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .chat-area {
+      flex: 1;
+      padding: 1.5em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .chat-header {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 1em;
+    }
+
+    .chat-box {
+      flex-grow: 1;
+      overflow-y: auto;
+      margin-bottom: 1em;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-message {
+      background: #3a3b52;
+      padding: 0.8em;
+      border-radius: 10px;
+      margin-bottom: 0.8em;
+      max-width: 70%;
+    }
+
+    .chat-message.you {
+      background: #00c896;
+      color: #000;
+      align-self: flex-end;
+    }
+
+    .chat-input {
+      display: flex;
+      gap: 0.5em;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 0.8em;
+      border-radius: 8px;
+      border: none;
+      background: #3a3b52;
+      color: white;
+      height: 45px; /* add consistent height */
+    }
+
+    .chat-input button {
+      padding: 0 1.2em;
+      background: #00c896;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #1e1f2f;
+      height: 45px; /* match input height */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    @media (max-width: 768px) {
+      section {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #444;
+        height: auto;
+      }
+
+      .chat-area {
+        height: 60vh;
+      }
+    }
+
+        .file-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      padding: 0 0.8em;
+      background: #3a3b52;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      height: 45px;
+    }
+
+    .file-btn:hover {
+      background: #4a4c65;
+    }
+
+  </style>
+</head>
+<body>
+  <header>MedEase - Messages</header>
+  <section>
+    <div class="sidebar">
+      <input type="text" placeholder=" 🔍︎ Search conversations..." />
+      <div class="message-list">
+        <div class="card" onclick="openChat('Dr. Reyes')">
+          <img src="https://i.pravatar.cc/40?img=1" alt="User 1">
+          <div>
+            <strong>Dr. Reyes</strong><br>
+            <small>See you at 3PM!</small>
+          </div>
+        </div>
+        <div class="card" onclick="openChat('Dr. Tan')">
+          <img src="https://i.pravatar.cc/40?img=2" alt="User 2">
+          <div>
+            <strong>Dr. Tan</strong><br>
+            <small>Your prescription is ready.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-area">
+      <div class="chat-header" id="chatWith">Select a conversation</div>
+      <div class="chat-box" id="chatBox"></div>
+
+
+    <div class="chat-input">
+      <label for="fileUpload" class="file-btn" title="Attach a file">🧷</label>
+      <input type="file" id="fileUpload" hidden>
+
+      <input type="text" id="messageInput" placeholder="Type a message..." disabled />
+      <button id="sendBtn" disabled>Send</button>
+    </div>
+
+    </div>
+  </section>
+
+  <script>
+    let currentChat = '';
+
+    function openChat(name) {
+      currentChat = name;
+      document.getElementById('chatWith').textContent = `Chat with ${name}`;
+      const chatBox = document.getElementById('chatBox');
+      chatBox.innerHTML = `
+        <div class="chat-message">Hello! How can I help you today?</div>
+        <div class="chat-message you">Just wanted to confirm our appointment.</div>
+      `;
+      document.getElementById('messageInput').disabled = false;
+      document.getElementById('sendBtn').disabled = false;
+      document.getElementById('messageInput').focus();
+    }
+
+    document.getElementById('sendBtn').addEventListener('click', function () {
+      const input = document.getElementById('messageInput');
+      const msg = input.value.trim();
+      if (msg === '') return;
+
+      const chatBox = document.getElementById('chatBox');
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('chat-message', 'you');
+      messageDiv.textContent = msg;
+      chatBox.appendChild(messageDiv);
+
+      input.value = '';
+      chatBox.scrollTop = chatBox.scrollHeight;
+    });
+
+    document.getElementById('messageInput').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        document.getElementById('sendBtn').click();
+      }
+    });
+
+    document.getElementById('fileUpload').addEventListener('change', function () {
+  const file = this.files[0];
+  if (file) {
+    alert(`File selected: ${file.name}`);
+    }
+    });
+
+  </script>
+</body>
+</html>

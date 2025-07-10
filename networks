@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hospital Network - MedEase</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    }
+
+    body {
+    background: #1e1f2f;
+    color: #ffffff;
+    }
+
+    header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #2b2d42;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex-shrink: 0;
+    }
+
+    .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #edf2f4;
+    }
+
+    nav a {
+    color: #edf2f4;
+    margin: 0 0.75em;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+    }
+
+    nav a:hover {
+    color: #8d99ae;
+    }
+
+    /* hero */
+    .hero {
+    background: linear-gradient(rgba(30, 31, 47, 0.9), rgba(30, 31, 47, 0.9));
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    text-align: center;
+    }
+
+    .hero-content {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    }
+
+    .section {
+    padding: 4rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    }
+
+    .section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #89c9b8;
+    position: relative;
+    padding-bottom: 0.5rem;
+    }
+
+    .section-title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: #a19fbd;
+    }
+
+    /* Search Style */
+    .search-container {
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+    }
+
+    .search-input {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 50px;
+    border: none;
+    background: #2b2d42;
+    color: white;
+    font-size: 1rem;
+    padding-left: 4rem;
+    }
+
+    .search-input::placeholder {
+    color: #8d99ae;
+    }
+
+    .search-wrapper {
+    position: relative;
+    }
+
+    .search-icon {
+    position: absolute;
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8d99ae;
+    }
+
+    /* Card Design */
+    .hospital-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    }
+
+    .hospital-card {
+    background: #2b2d42;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    min-height: 200px;
+    position: relative;
+    }
+
+    .hospital-card:hover {
+    transform: translateY(-5px);
+    }
+
+    .hospital-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    background: #89c9b8;
+    }
+
+    .hospital-img {
+    width: 50%;
+    background-size: cover;
+    background-position: center;
+    }
+
+    .hospital-content {
+    padding: 1.5rem;
+    color: white;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    }
+
+    .hospital-name {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-bottom: 0.8rem;
+    }
+
+    .hospital-name:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: rgba(161, 159, 189, 0.3);
+    }
+
+    .hospital-location {
+    color: #8d99ae;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    }
+
+    .hospital-specialty {
+    display: inline-block;
+    background: #a19fbd;
+    color: #2b2d42;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    }
+
+    .hospital-details {
+    margin-top: 1rem;
+    color: #edf2f4;
+    line-height: 1.6;
+    flex-grow: 1;
+    }
+
+    .hospital-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    }
+
+    .action-btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    }
+
+    .primary-btn {
+    background: #89c9b8;
+    color: #ffffff;
+    }
+
+    .secondary-btn {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid #89c9b8;
+    }
+
+    .action-btn:hover {
+    opacity: 0.9;
+    }
+
+    footer {
+    background: #1e1f2f;
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+    border-top: 1px solid #2b2d42;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Nav Bar -->
+  <header>
+    <div class="logo">MedEase</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#network">Network</a>
+      <a href="#chat">Chat</a>
+      <a href="#profile">Profile</a>
+      <a href="#messages">Messages</a>
+      <a href="#notifications">Notifications</a>
+    </nav>
+  </header>
+
+  <!-- hero -->
+  <section class="hero">
+    
+    <div class="hero-content">
+      <h1>Our Hospital Network</h1>
+      <p>Partnered with the best healthcare providers in your area</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title"><strong>Connected Hospitals</strong></h2>
+    
+    <div class="search-container">
+      
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" placeholder="Search by location...">
+      
+      </div>
+    </div>
+    
+    <div class="hospital-grid">
+      
+      <div class="hospital-card">
+        
+        <div class="hospital-img" style="background-image: url('https://lh3.googleusercontent.com/gps-cs-s/AC9h4npW-KevSzfMZQ4dPSDSc0FB4eHa5wslDIUk4c5ylxYT7nsYE_iqJmFE6ult6BhwexLjS86vua4DpYGBPZE8bKK8FvZms3Y_W2gB4QahLNG60qv3_-ee5OKqyxaa3QrNthLjCPYU=s680-w680-h510-rw')"></div>
+        
+        <div class="hospital-content">
+          <h3 class="hospital-name"><strong>St. Luke's Medical Center</strong></h3>
+          
+          <div class="hospital-location">
+            <span>📍</span> 279 E Rodriguez Sr. Ave, Quezon City, 1112 Metro Manila
+          </div>
+          
+          <div class="hospital-details">
+            <p>Discover St. Luke's Medical Center Philippines, a beacon of excellence in healthcare for over a century.</p>
+            <p><strong>Distance:</strong> (x) miles from your location</p>
+          </div>
+          
+          <div class="hospital-actions">
+            <button class="action-btn primary-btn">Get Directions</button>
+            <button class="action-btn secondary-btn">View Profile</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hospital-card">
+        
+        <div class="hospital-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/6/6f/Makati_Medical_Center_%28Makati%3B_03-21-2021%29.jpg')"></div>
+        
+        <div class="hospital-content">
+          <h3 class="hospital-name"><strong>Makati Medical Center</strong></h3>
+          
+          <div class="hospital-location">
+            <span>📍</span> 2 Amorsolo Street, Legazpi Village, Makati City, 1229 Metro Manila
+          </div>
+          
+          <div class="hospital-details">
+            <p>MakatiMed, a premier healthcare facility in Philippines, offers a wide range of services with advanced technologies.</p>
+            <p><strong>Distance:</strong> (x) miles from your location</p>
+          </div>
+          
+          <div class="hospital-actions">
+            <button class="action-btn primary-btn">Get Directions</button>
+            <button class="action-btn secondary-btn">View Profile</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hospital-card">
+        
+        <div class="hospital-img" style="background-image: url('https://lh3.googleusercontent.com/gps-cs-s/AC9h4nqWyoEXS7JjUwhuAsEEXswKqYDlLlwJJSPCBcKM5-oz5t79NawQ8NwOQFgD6XlN_Yk5asgkOu2oYWmtunvbuOwxYw4geHJQDqNtgMXkbmm8OhlCano911f8YnsywMxZi1b5ww5FoQ=s680-w680-h510-rw')"></div>
+        
+        <div class="hospital-content">
+          <h3 class="hospital-name"><strong>The Medical City</strong></h3>
+          
+          <div class="hospital-location">
+            <span>📍</span> Ortigas Ave, Pasig, 1800 Metro Manila
+          </div>
+          
+          <div class="hospital-details">
+            <p>A premier hospital in the Philippines. Your partner in health. Providing you with world-class care anytime, anywhere.</p>
+            <p><strong>Distance:</strong> (x) miles from your location</p>
+          </div>
+          
+          <div class="hospital-actions">
+            <button class="action-btn primary-btn">Get Directions</button>
+            <button class="action-btn secondary-btn">View Profile</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 MedEase | Privacy Policy | Terms of Use
+  </footer>
+</body>
+</html>
